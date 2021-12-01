@@ -10,13 +10,13 @@
         <h1><div>Atlas Keuken</div></h1>
     </div>
     <form>
-<div>
-            <label>Naam</label>
-            <select id="students" onchange="selectedSubjectName(this)" name="students"></select>
+        <div>
+            <label for="name">Naam</label>
+            <select for="name" id="students" onchange="selectedSubjectName(this)" name="students"></select>
         </div>
         <div>
-            <label>Klas</label>
-            <input id="klas" disabled type="text">
+            <label for="klas">Klas</label>
+            <input  id="klas" name="klas" disabled type="text">
         </div>
         <div>
             <label>Levering</label>
@@ -25,64 +25,46 @@
         <div >
             <label >Broodje</label>
             <select>
-                <option value="option-1" selected="true" id="select-1638211723385-0">Option 1</option>
+                <option value="option-1" selected="true" id="select-1638211723385-0">Martino</option>
                 
             </select>
         </div>
         <div>
-            <label >Opmerking</label>
-            <textarea disabled type="textarea"></textarea>
+            <label>Opmerking</label>
+            <input id="opmerking" name="opmerking" type="text">
         </div>
-        <button>Submit</button>
-    </div>
-    </form>
-    <div>
-        
+        <button type="submit">Submit</button>
+    
+    </form>    
        
         
 
 </body>
 </html>
-
 <script>
-$(document).ready(function(){
-
-let dropdown = $('#students');
-
-dropdown.empty();
-
-dropdown.append('<option selected="true" disabled>-maak keuze-</option>');
-dropdown.prop('selectedIndex', 0);
-
-const url = 'https://mocki.io/v1/88471c08-9aca-4993-a204-3c561a48235e';
-
-// Populate dropdown with list of provinces
-    $.getJSON(url, function (data) {
-        $.each(data, function (key, entry) {
-            dropdown.append($('<option></option>').attr('value', entry.StudentID).text(entry.Naam));
-        })
+    $(document).ready(function(){
+    
+    let dropdown = $('#students');
+    
+    dropdown.empty();
+    
+    dropdown.append('<option selected="true" disabled>-maak keuze-</option>');
+    dropdown.prop('selectedIndex', 0);
+    
+    const url = 'https://mocki.io/v1/88471c08-9aca-4993-a204-3c561a48235e';
+    
+    // Populate dropdown with list of provinces
+        $.getJSON(url, function (data) {
+            $.each(data, function (key, entry) {
+    
+                dropdown.append($('<option></option>').attr('value',entry.StudentID+"|"+entry.Klas ).text(entry.Naam + " " + entry.Voornaam) );
+            })
+        });
     });
-});
-</script>
-
-<script>
-    function selectedSubjectName() {
-        console.log($('#students').val());
-        
-
-
-        
-      var subjectIdNode = document.getElementById('students');
-      var name = subjectIdNode.options[subjectIdNode.selectedIndex].text;
-      const url = 'https://mocki.io/v1/88471c08-9aca-4993-a204-3c561a48235e';
-      $.getJSON(url, function (data) {
-      $.each(data, function(key, entry){
-          if(entry.Naam == name){
-              $('#klas').val(entry.Klas);
-          }
-      })
-    });
-
-   }
-</script>
-<script></script>
+    </script>
+    <script>
+        function selectedSubjectName() {
+            var array = $('#students').val().split('|');
+            $('#klas').val(array[1]);        
+       }
+    </script>

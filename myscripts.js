@@ -1,5 +1,26 @@
 
 $(document).ready(function(){
+
+    const Url ='localhost:8080/api/v1/bestelling';
+        let today = new Date().toISOString().slice(0, 10); 
+                const data={
+                    "broodjeId": 9,
+                    "studentId": 9,
+                    "bestelling": "2021-09-10",
+                    "prijs": 9,
+                    "betaald": true,
+                    "leverdatum": "1999-09-10"
+                }
+
+    console.log("test");
+    $('#btn').click(function(){
+        console.log("button clicked");
+        $.post(Url,data,function(data,status){
+            console.log('${data} and status is ${status}')
+        });
+        
+    })      
+
     let dropdown = $('#students');
     dropdown.empty();
     dropdown.append('<option selected="true" disabled>-maak keuze-</option>');
@@ -24,26 +45,6 @@ $(document).ready(function(){
                 dropdown2.append($('<option></option>').attr('value',entry.broodjeId ).text(entry.broodjeNaam + " (" + entry.prijs +" euro)") );
             })
         });
-
-
-        const Url ='https://localhost:8080/api/v1/bestelling';
-        let today = new Date().toISOString().slice(0, 10)
-                const data={
-                    "bestelId": 9,
-                    "broodjeId": 1,
-                    "studentId": 1,
-                     "bestelling": "1982-09-10",
-                    "prijs": 1.5,
-                     "betaald": true,
-                    "leverdatum": "1982-09-10"
-                }
-        
-                $('.btn').click(function(){
-                    $.post(Url,data,function(data,status){
-                        console.log('${data} and status is ${status}')
-                    });
-                })      
-
         
     });
 

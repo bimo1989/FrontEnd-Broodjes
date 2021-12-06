@@ -1,0 +1,15 @@
+const Url ='localhost:8080/api/v1/bestelling';
+let today = new Date().toISOString().slice(0, 10)
+        const data={
+            name: $('#students').val(),
+            klas: $('#klas').val(),
+            broodje: $('#broodje').val(),
+            leverdatum: $('#leverdatum').val(),
+            besteldatum: today,
+        }
+
+        $('.btn').click(function(){
+            $.post(Url,data,function(data,status){
+                console.log('${data} and status is ${status}')
+            });
+        })

@@ -3,20 +3,20 @@ $(document).ready(function(){
 
     const Url ='localhost:8080/api/v1/bestelling';
         let today = new Date().toISOString().slice(0, 10); 
-                const data={
-                    "broodjeId": 9,
-                    "studentId": 9,
-                    "bestelling": "2021-09-10",
+                const dataBestelling={
+                    "broodjeId": 1,
+                    "studentId": 1,
+                    "bestelling": "1987-09-10",
                     "prijs": 9,
                     "betaald": true,
-                    "leverdatum": "1999-09-10"
+                    "leverdatum": "1987-09-10"
                 }
 
     console.log("test");
     $('#btn').click(function(){
         console.log("button clicked");
-        $.post(Url,data,function(data,status){
-            console.log('${data} and status is ${status}')
+        $.post(Url,data,function(dataBestelling,status){
+            console.log('${dataBestelling} and status is ${status}')
         });
         
     })      
@@ -25,7 +25,7 @@ $(document).ready(function(){
     dropdown.empty();
     dropdown.append('<option selected="true" disabled>-maak keuze-</option>');
     dropdown.prop('selectedIndex', 0);
-    const urlStudent = 'https://mocki.io/v1/88471c08-9aca-4993-a204-3c561a48235e';
+    const urlStudent = 'http://localhost:8080/api/v1/student';
 
         $.getJSON(urlStudent, function (data) {
             $.each(data, function (key, entry) {
